@@ -28,7 +28,7 @@ class AuthRoutes extends common_routes_config_1.CommonRoutesConfig {
         this.app.post(`/me`, [
             jwt_middleware_1.default.validJWTNeeded,
             auth_middleware_1.default.checkUser,
-            users_controller_1.default.getUsername
+            users_controller_1.default.getUsername,
         ]);
         return this.app;
     }

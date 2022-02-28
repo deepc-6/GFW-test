@@ -28,7 +28,11 @@ class MongooseService {
       })
       .catch((err) => {
         const retrySeconds = 5;
-        log(`MongoDB connection unsuccessful (will retry #${++this.count} after ${retrySeconds} seconds):`, err);
+        log(
+          `MongoDB connection unsuccessful (will retry #${++this
+            .count} after ${retrySeconds} seconds):`,
+          err
+        );
         setTimeout(this.connectWithRetry, retrySeconds * 1000);
       });
   };

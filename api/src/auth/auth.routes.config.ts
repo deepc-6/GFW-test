@@ -26,9 +26,9 @@ export class AuthRoutes extends CommonRoutesConfig {
     this.app.post(`/me`, [
       jwtMiddleware.validJWTNeeded,
       authMiddleware.checkUser,
-      UsersController.getUsername
+      UsersController.getUsername,
     ]);
-    
+
     return this.app;
   }
 }

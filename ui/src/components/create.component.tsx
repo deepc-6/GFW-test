@@ -1,13 +1,13 @@
-import { SyntheticEvent, useState } from "react";
-import { useFormik } from "formik";
-import * as Yup from "yup";
+import { SyntheticEvent, useState } from 'react';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Typography from "@material-ui/core/Typography";
+import Typography from '@material-ui/core/Typography';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
-import AuthService from "../services/auth.service";
+import { createUser } from '../services/auth.service';
 import useStyles from '../styles';
 
 const Create = () => {
@@ -23,20 +23,21 @@ const Create = () => {
 
   const validationSchema = () => {
     return Yup.object().shape({
-      username: Yup.string().required("This field is required"),
+      username: Yup.string().required('This field is required'),
       password: Yup.string()
         .test(
-          "len",
-          "The password must be at least 6 characters",
-          (val: any) =>
-            val &&
-            val.toString().length >= 6
+          'len',
+          'The password must be at least 6 characters',
+          (val: any) => val && val.toString().length >= 6
         )
-        .required("This field is required"),
+        .required('This field is required'),
     });
   };
 
-  const handleSuccessClose = (event: SyntheticEvent<any, Event>, reason: string) => {
+  const handleSuccessClose = (
+    event: SyntheticEvent<any, Event>,
+    reason: string
+  ) => {
     if (reason === 'clickaway') {
       return;
     }
@@ -44,7 +45,10 @@ const Create = () => {
     setOpenSuccess(false);
   };
 
-  const handleErrorClose = (event: SyntheticEvent<any, Event>, reason: string) => {
+  const handleErrorClose = (
+    event: SyntheticEvent<any, Event>,
+    reason: string
+  ) => {
     if (reason === 'clickaway') {
       return;
     }
@@ -52,16 +56,16 @@ const Create = () => {
     setOpenError(false);
   };
 
-  const handleCreateUser = (formValue: { username: string; password: string }, resetForm: Function) => {
+  const handleCreateUser = (
+    formValue: { username: string; password: string },
+    resetForm: Function
+  ) => {
     const { username, password } = formValue;
 
     setCreateSuccess(false);
 
-    AuthService.createUser(
-      username,
-      password
-    ).then(
-      response => {
+    createUser(username, password).then(
+      (response) => {
         if (response.status === 201) {
           setCreateSuccess(true);
           setErrorMessage('');
@@ -69,11 +73,9 @@ const Create = () => {
           resetForm();
         }
       },
-      error => {
+      (error) => {
         const resMessage =
-          (error.response &&
-            error.response.data &&
-            error.response.data.error);
+          error.response && error.response.data && error.response.data.error;
 
         setCreateSuccess(false);
         setErrorMessage(resMessage);
@@ -84,8 +86,8 @@ const Create = () => {
 
   const formik = useFormik({
     initialValues: {
-      username: "",
-      password: ""
+      username: '',
+      password: '',
     },
     validationSchema: validationSchema,
     onSubmit: (values, { resetForm }) => {
@@ -96,17 +98,31 @@ const Create = () => {
   return (
     <div className={classes.container}>
       {createSuccess && (
-        <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={openSuccess} autoHideDuration={5000} onClose={handleSuccessClose}>
-          <Alert onClose={handleSuccessClose} severity="success">{'User created successfully'}</Alert>
+        <Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+          open={openSuccess}
+          autoHideDuration={5000}
+          onClose={handleSuccessClose}
+        >
+          <Alert onClose={handleSuccessClose} severity="success">
+            {'User created successfully'}
+          </Alert>
         </Snackbar>
       )}
       {errorMessage && (
-        <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={openError} autoHideDuration={5000} onClose={handleErrorClose}>
-          <Alert onClose={handleErrorClose} severity="error">{errorMessage}</Alert>
+        <Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+          open={openError}
+          autoHideDuration={5000}
+          onClose={handleErrorClose}
+        >
+          <Alert onClose={handleErrorClose} severity="error">
+            {errorMessage}
+          </Alert>
         </Snackbar>
       )}
       <div className={classes.container}>
-        <Typography variant='h6'>{'CREATE USER'}</Typography>
+        <Typography variant="h6">{'CREATE USER'}</Typography>
         <form onSubmit={formik.handleSubmit} className={classes.form}>
           <TextField
             className={classes.textField}
@@ -133,11 +149,18 @@ const Create = () => {
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
           />
-          <Button variant="contained" color="primary" type="submit" className={classes.button}>Create User</Button>
+          <Button
+            variant="contained"
+            color="primary"
+            type="submit"
+            className={classes.button}
+          >
+            Create User
+          </Button>
         </form>
       </div>
     </div>
   );
-}
+};
 
 export default Create;

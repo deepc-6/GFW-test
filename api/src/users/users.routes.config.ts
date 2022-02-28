@@ -1,8 +1,8 @@
 import express from 'express';
 import { body } from 'express-validator';
+
 import UsersController from './controllers/users.controller';
 import UsersMiddleware from './middleware/users.middleware';
-import jwtMiddleware from '../auth/middleware/jwt.middleware';
 import { CommonRoutesConfig } from '../common/common.routes.config';
 import BodyValidationMiddleware from '../common/middleware/body.validation.middleware';
 
@@ -14,9 +14,7 @@ export class UsersRoutes extends CommonRoutesConfig {
   configureRoutes(): express.Application {
     this.app
       .route(`/`)
-      .get(
-        UsersController.listUsers
-      )
+      .get(UsersController.listUsers)
       .post(
         body('username').not().isEmpty(),
         body('password')

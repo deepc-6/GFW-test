@@ -1,5 +1,6 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
+
 import { Jwt } from '../../common/types/jwt';
 
 // @ts-expect-error
@@ -17,10 +18,7 @@ class JwtMiddleware {
         if (authorization[0] !== 'Bearer') {
           return res.status(401).send();
         } else {
-          res.locals.jwt = jwt.verify(
-            authorization[1],
-            jwtSecret
-          ) as Jwt;
+          res.locals.jwt = jwt.verify(authorization[1], jwtSecret) as Jwt;
           next();
         }
       } catch (err) {

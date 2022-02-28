@@ -21,7 +21,7 @@ const useStyles = makeStyles({
     alignItems: 'center',
     '& .MuiSnackbar-root': {
       top: 88,
-    }
+    },
   },
   form: {
     display: 'flex',

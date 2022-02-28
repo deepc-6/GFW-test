@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
-import { Link, navigate, Router, RouteComponentProps} from "@reach/router";
+import { useEffect, useState } from 'react';
+import { Link, navigate, Router, RouteComponentProps } from '@reach/router';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import HomeIcon from '@material-ui/icons/Home';
 
-import AuthService from "./services/auth.service";
+import { getCurrentUser, logout } from './services/auth.service';
 import IUser from './types/user.type';
-import Home from "./components/home.component";
-import Login from "./components/login.component";
-import Create from "./components/create.component";
-import Profile from "./components/profile.component";
-import EventBus from "./common/EventBus";
+import Home from './components/home.component';
+import Login from './components/login.component';
+import Create from './components/create.component';
+import Profile from './components/profile.component';
+import EventBus from './common/EventBus';
 import useStyles from './styles';
 
 const HomePage = (props: RouteComponentProps) => <Home />;
@@ -25,27 +25,27 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState<IUser | {}>({});
 
   const goHome = () => {
-    navigate("/");
+    navigate('/');
   };
 
-  const logout = () => {
-    AuthService.logout();
+  const onLogout = () => {
+    logout();
     setCurrentUser({});
-    navigate("/");
-  }
+    navigate('/');
+  };
 
   useEffect(() => {
-    const user = AuthService.getCurrentUser();
+    const user = getCurrentUser();
 
     if (user) {
       setCurrentUser(user);
     }
 
-    EventBus.on("logout", logout);
+    EventBus.on('logout', onLogout);
 
     return () => {
-      EventBus.remove("logout", logout);
-    }
+      EventBus.remove('logout', onLogout);
+    };
   }, []);
 
   return (
@@ -55,16 +55,36 @@ const App = () => {
           <IconButton color="inherit" edge="start" onClick={goHome}>
             <HomeIcon />
           </IconButton>
-          {Object.keys(currentUser).length ? (  
+          {Object.keys(currentUser).length ? (
             <div>
-              <Button><Link to={"/me"} className={classes.link}>Me</Link></Button>
-              <Button><Link to={"/create"} className={classes.link}>Create User</Link></Button>
-              <Button><Link to="/" onClick={logout} className={classes.link}>Logout</Link></Button>
+              <Button>
+                <Link to={'/me'} className={classes.link}>
+                  Me
+                </Link>
+              </Button>
+              <Button>
+                <Link to={'/create'} className={classes.link}>
+                  Create User
+                </Link>
+              </Button>
+              <Button>
+                <Link to="/" onClick={onLogout} className={classes.link}>
+                  Logout
+                </Link>
+              </Button>
             </div>
           ) : (
             <div>
-              <Button><Link to={"/create"} className={classes.link}>Create User</Link></Button>
-              <Button><Link to={"/login"} className={classes.link}>Login</Link></Button>
+              <Button>
+                <Link to={'/create'} className={classes.link}>
+                  Create User
+                </Link>
+              </Button>
+              <Button>
+                <Link to={'/login'} className={classes.link}>
+                  Login
+                </Link>
+              </Button>
             </div>
           )}
         </Toolbar>
@@ -79,6 +99,6 @@ const App = () => {
       </div>
     </div>
   );
-}
+};
 
 export default App;

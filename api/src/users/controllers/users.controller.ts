@@ -1,5 +1,6 @@
 import express from 'express';
 import argon2 from 'argon2';
+
 import usersService from '../services/users.service';
 
 class UsersController {

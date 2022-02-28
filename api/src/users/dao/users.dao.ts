@@ -1,4 +1,5 @@
 import shortid from 'shortid';
+
 import { CreateUserDto } from '../dto/create.user.dto';
 import mongooseService from '../../common/services/mongoose.service';
 
@@ -7,11 +8,14 @@ class UsersDao {
 
   Schema = mongooseService.getMongoose().Schema;
 
-  userSchema = new this.Schema({
-    _id: String,
-    username: String,
-    password: { type: String, select: false },
-  }, { id: false });
+  userSchema = new this.Schema(
+    {
+      _id: String,
+      username: String,
+      password: { type: String, select: false },
+    },
+    { id: false }
+  );
 
   User = mongooseService.getMongoose().model('Users', this.userSchema);
 

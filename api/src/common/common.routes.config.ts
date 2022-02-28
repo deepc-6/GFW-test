@@ -13,6 +13,6 @@ export abstract class CommonRoutesConfig {
   getName() {
     return this.name;
   }
-  
+
   abstract configureRoutes(): express.Application;
 }

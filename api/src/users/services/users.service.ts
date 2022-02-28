@@ -1,6 +1,6 @@
 import UsersDao from '../dao/users.dao';
-import { CRUD } from '../../common/interfaces/crud.interface';
 import { CreateUserDto } from '../dto/create.user.dto';
+import { CRUD } from '../../common/interfaces/crud.interface';
 
 class UsersService implements CRUD {
   async create(resource: CreateUserDto) {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -7,33 +7,29 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-import UserService from "../services/user.service";
+import { getAllUsers } from '../services/user.service';
 
 interface User {
   _id: string;
   username: string;
-};
+}
 
 const Home = () => {
   const [users, setUsers] = useState<object[] | []>([]);
 
-  const getAllUsers = () => {
-    UserService.getAllUsers().then(
-      response => {
+  const getUsers = () => {
+    getAllUsers().then(
+      (response) => {
         setUsers(response.data);
       },
-      error => {
-        setUsers(
-            (error.response && error.response.data) ||
-            error.message ||
-            error.toString()
-        );
+      () => {
+        setUsers([]);
       }
     );
-  }
+  };
 
   useEffect(() => {
-    getAllUsers();
+    getUsers();
   }, []);
 
   return (
@@ -50,8 +46,7 @@ const Home = () => {
               <TableCell>{user.username}</TableCell>
             </TableRow>
           ))}
-          {!users.length
-          ? (
+          {!users.length ? (
             <TableRow>
               <TableCell>{'No users found'}</TableCell>
             </TableRow>
@@ -60,6 +55,6 @@ const Home = () => {
       </Table>
     </TableContainer>
   );
-}
+};
 
 export default Home;

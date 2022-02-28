@@ -1,9 +1,8 @@
 import express from 'express';
-import jwt from 'jsonwebtoken';
 import * as argon2 from 'argon2';
-import usersService from '../../users/services/users.service';
-import jwtMiddleware from './jwt.middleware';
 import dotenv from 'dotenv';
+
+import usersService from '../../users/services/users.service';
 
 const dotenvResult = dotenv.config();
 
@@ -41,9 +40,9 @@ class authMiddleware {
     res: express.Response,
     next: express.NextFunction
   ) {
-    const username  = res.locals.jwt.username;
+    const username = res.locals.jwt.username;
 
-    if (username) {  
+    if (username) {
       res.locals.user = username;
       next();
     } else {

@@ -1,7 +1,7 @@
 import { AxiosRequestHeaders } from 'axios';
 
 const authHeader = (): AxiosRequestHeaders => {
-  const userStr = localStorage.getItem("user");
+  const userStr = localStorage.getItem('user');
   let user = null;
 
   if (userStr) {
@@ -9,10 +9,9 @@ const authHeader = (): AxiosRequestHeaders => {
   }
 
   if (user && user.accessToken) {
-    return { Authorization: 'Bearer ' + user.accessToken };
-  } else {
-    return {};
+    return { Authorization: `Bearer ${user.accessToken}` };
   }
-}
+  return {};
+};
 
 export default authHeader;

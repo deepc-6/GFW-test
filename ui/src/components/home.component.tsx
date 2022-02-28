@@ -6,6 +6,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { useTranslation } from 'react-i18next';
 
 import { getAllUsers } from '../services/user.service';
 
@@ -15,7 +16,13 @@ interface User {
 }
 
 const Home = () => {
+  const { t } = useTranslation();
   const [users, setUsers] = useState<object[] | []>([]);
+
+  const translations = {
+    users: t('users'),
+    noUsersFound: t('no-users-found'),
+  };
 
   const getUsers = () => {
     getAllUsers().then(
@@ -37,7 +44,7 @@ const Home = () => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>Username</TableCell>
+            <TableCell>{translations.users}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -48,7 +55,7 @@ const Home = () => {
           ))}
           {!users.length ? (
             <TableRow>
-              <TableCell>{'No users found'}</TableCell>
+              <TableCell>{translations.noUsersFound}</TableCell>
             </TableRow>
           ) : null}
         </TableBody>

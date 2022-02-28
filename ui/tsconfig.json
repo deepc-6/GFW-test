@@ -12,7 +12,8 @@
     "lib": ["es6", "dom"],
     "noImplicitThis": true,
     "strictNullChecks": true,
-    "strict": true
+    "strict": true,
+    "resolveJsonModule": true
   },
   "include": [
     "src/index.tsx"

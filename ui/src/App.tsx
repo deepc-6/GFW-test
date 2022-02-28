@@ -5,7 +5,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import HomeIcon from '@material-ui/icons/Home';
+import { useTranslation } from 'react-i18next';
 
+import './i18n/config';
 import { getCurrentUser, logout } from './services/auth.service';
 import IUser from './types/user.type';
 import Home from './components/home.component';
@@ -21,8 +23,16 @@ const CreatePage = (props: RouteComponentProps) => <Create />;
 const ProfilePage = (props: RouteComponentProps) => <Profile />;
 
 const App = () => {
+  const { t } = useTranslation();
   const classes = useStyles();
   const [currentUser, setCurrentUser] = useState<IUser | {}>({});
+
+  const translations = {
+    me: t('me'),
+    createUser: t('create-user'),
+    login: t('login'),
+    logout: t('logout'),
+  };
 
   const goHome = () => {
     navigate('/');
@@ -59,17 +69,17 @@ const App = () => {
             <div>
               <Button>
                 <Link to={'/me'} className={classes.link}>
-                  Me
+                  {translations.me}
                 </Link>
               </Button>
               <Button>
                 <Link to={'/create'} className={classes.link}>
-                  Create User
+                  {translations.createUser}
                 </Link>
               </Button>
               <Button>
                 <Link to="/" onClick={onLogout} className={classes.link}>
-                  Logout
+                  {translations.logout}
                 </Link>
               </Button>
             </div>
@@ -77,12 +87,12 @@ const App = () => {
             <div>
               <Button>
                 <Link to={'/create'} className={classes.link}>
-                  Create User
+                  {translations.createUser}
                 </Link>
               </Button>
               <Button>
                 <Link to={'/login'} className={classes.link}>
-                  Login
+                  {translations.login}
                 </Link>
               </Button>
             </div>

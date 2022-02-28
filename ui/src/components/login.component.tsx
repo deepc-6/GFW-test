@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import { useTranslation } from 'react-i18next';
 
 import { login } from '../services/auth.service';
 import useStyles from '../styles';
@@ -16,9 +17,14 @@ const Alert = (props: any) => {
 };
 
 const Login = () => {
+  const { t } = useTranslation();
   const classes = useStyles();
   const [errorMessage, setErrorMessage] = useState<string | ''>('');
   const [openError, setOpenError] = useState<boolean | false>(false);
+
+  const translations = {
+    login: t('login'),
+  };
 
   const Alert = (props: any) => {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -85,7 +91,7 @@ const Login = () => {
         </Snackbar>
       )}
       <div className={classes.container}>
-        <Typography variant="h6">{'LOGIN'}</Typography>
+        <Typography variant="h6">{translations.login}</Typography>
         <form onSubmit={formik.handleSubmit} className={classes.form}>
           <TextField
             className={classes.textField}
@@ -118,7 +124,7 @@ const Login = () => {
             type="submit"
             className={classes.button}
           >
-            Login
+            {translations.login}
           </Button>
         </form>
       </div>

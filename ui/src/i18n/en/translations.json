@@ -1,0 +1,9 @@
+{
+  "me": "me",
+  "create-user": "Create User",
+  "login": "Login",
+  "logout": "Logout",
+  "users": "Users",
+  "no-users-found": "No users found",
+  "username": "Username"
+}

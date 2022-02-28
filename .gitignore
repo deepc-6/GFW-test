@@ -398,7 +398,7 @@ FodyWeavers.xsd
 *.sln.iml
 
 # Docker data
-data/
+**/data/
 
 # Environment variables
-*.env
+**/.env

@@ -1,7 +1,7 @@
 {
   "name": "gfw-test-ui",
   "version": "1.0.0",
-  "description": "The frontend for the test project for GFW",
+  "description": "The frontend for the GFW test project",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --open",

@@ -15,7 +15,6 @@ export class UsersRoutes extends CommonRoutesConfig {
     this.app
       .route(`/`)
       .get(
-        jwtMiddleware.validJWTNeeded,
         UsersController.listUsers
       )
       .post(

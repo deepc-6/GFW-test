@@ -29,10 +29,11 @@ class UsersDao {
     return this.User.findOne({ username }).exec();
   }
 
-  async getUserByUsernameWithPassword(userName: string) {
-    return this.User.findOne({ userName })
+  async getUserByUsernameWithPassword(username: string) {
+    const user = await this.User.findOne({ username })
       .select('_id username +password')
       .exec();
+    return user;
   }
 
   async getUserById(userId: string) {

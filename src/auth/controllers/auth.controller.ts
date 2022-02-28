@@ -29,7 +29,7 @@ class AuthController {
         expiresIn: tokenExpirationInSeconds,
       });
       return res
-        .status(201)
+        .status(200)
         .send({ accessToken: token, refreshToken: hash });
     } catch (err) {
       log('createJWT error: %O', err);

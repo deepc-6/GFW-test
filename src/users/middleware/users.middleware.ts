@@ -23,7 +23,7 @@ class UsersMiddleware {
   ) {
     const user = await userService.getUserByUsername(req.body.username);
     if (user) {
-      res.status(400).send({ error: `Username already exists` });
+      res.status(409).send({ error: `Username already exists` });
     } else {
       next();
     }

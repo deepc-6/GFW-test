@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, navigate, Router, RouteComponentProps } from '@reach/router';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -68,12 +68,12 @@ const App = () => {
           {Object.keys(currentUser).length ? (
             <div>
               <Button>
-                <Link to={'/me'} className={classes.link}>
+                <Link to="/me" className={classes.link}>
                   {translations.me}
                 </Link>
               </Button>
               <Button>
-                <Link to={'/create'} className={classes.link}>
+                <Link to="/create" className={classes.link}>
                   {translations.createUser}
                 </Link>
               </Button>
@@ -86,12 +86,12 @@ const App = () => {
           ) : (
             <div>
               <Button>
-                <Link to={'/create'} className={classes.link}>
+                <Link to="/create" className={classes.link}>
                   {translations.createUser}
                 </Link>
               </Button>
               <Button>
-                <Link to={'/login'} className={classes.link}>
+                <Link to="/login" className={classes.link}>
                   {translations.login}
                 </Link>
               </Button>

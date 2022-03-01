@@ -5,5 +5,6 @@
   "logout": "Logout",
   "users": "Users",
   "no-users-found": "No users found",
-  "username": "Username"
+  "username": "Username",
+  "create-user-success": "User created successfully"
 }

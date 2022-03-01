@@ -1,4 +1,4 @@
-import { SyntheticEvent, useState } from 'react';
+import React, { SyntheticEvent, useState } from 'react';
 import { navigate } from '@reach/router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -12,9 +12,9 @@ import { useTranslation } from 'react-i18next';
 import { login } from '../services/auth.service';
 import useStyles from '../styles';
 
-const Alert = (props: any) => {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-};
+const Alert = (props: any) => (
+  <MuiAlert elevation={6} variant="filled" {...props} />
+);
 
 const Login = () => {
   const { t } = useTranslation();
@@ -26,16 +26,11 @@ const Login = () => {
     login: t('login'),
   };
 
-  const Alert = (props: any) => {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
-  };
-
-  const validationSchema = () => {
-    return Yup.object().shape({
+  const validationSchema = () =>
+    Yup.object().shape({
       username: Yup.string().required('This field is required'),
       password: Yup.string().required('This field is required'),
     });
-  };
 
   const handleErrorClose = (
     event: SyntheticEvent<any, Event>,
@@ -54,7 +49,7 @@ const Login = () => {
     login(username, password).then(
       () => {
         navigate('/me');
-        location.reload();
+        window.location.reload();
       },
       () => {
         const resMessage = 'Invalid email and / or password';
@@ -70,7 +65,7 @@ const Login = () => {
       username: '',
       password: '',
     },
-    validationSchema: validationSchema,
+    validationSchema,
     onSubmit: (values) => {
       handleLogin(values);
     },

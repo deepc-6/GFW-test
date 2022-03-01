@@ -23,18 +23,21 @@
     "prettier",
     "eslint-plugin-tsdoc"
   ],
+  "ignorePatterns": ["*.html"],
   "rules": {
     "quotes": [
       "error",
       "single",
       { "avoidEscape": true, "allowTemplateLiterals": true }
     ],
+    "react/jsx-filename-extension": [2, { "extensions": [".ts", ".tsx"] }],
     "react/function-component-definition": [
       2,
       {
-        "namedComponents": "function-declaration"
+        "namedComponents": "arrow-function"
       }
     ],
+    "react/jsx-props-no-spreading": "off",
     "import/prefer-default-export": "off",
     "import/extensions": [
       "error",

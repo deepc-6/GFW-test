@@ -1,4 +1,4 @@
-import { SyntheticEvent, useState } from 'react';
+import React, { SyntheticEvent, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import TextField from '@material-ui/core/TextField';
@@ -11,6 +11,10 @@ import { useTranslation } from 'react-i18next';
 import { createUser } from '../services/auth.service';
 import useStyles from '../styles';
 
+const Alert = (props: any) => (
+  <MuiAlert elevation={6} variant="filled" {...props} />
+);
+
 const Create = () => {
   const { t } = useTranslation();
   const classes = useStyles();
@@ -21,14 +25,11 @@ const Create = () => {
 
   const translations = {
     createUser: t('create-user'),
+    createUserSuccess: t('create-user-success'),
   };
 
-  const Alert = (props: any) => {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
-  };
-
-  const validationSchema = () => {
-    return Yup.object().shape({
+  const validationSchema = () =>
+    Yup.object().shape({
       username: Yup.string().required('This field is required'),
       password: Yup.string()
         .test(
@@ -38,7 +39,6 @@ const Create = () => {
         )
         .required('This field is required'),
     });
-  };
 
   const handleSuccessClose = (
     event: SyntheticEvent<any, Event>,
@@ -95,7 +95,7 @@ const Create = () => {
       username: '',
       password: '',
     },
-    validationSchema: validationSchema,
+    validationSchema,
     onSubmit: (values, { resetForm }) => {
       handleCreateUser(values, resetForm);
     },
@@ -111,7 +111,7 @@ const Create = () => {
           onClose={handleSuccessClose}
         >
           <Alert onClose={handleSuccessClose} severity="success">
-            {'User created successfully'}
+            {translations.createUserSuccess}
           </Alert>
         </Snackbar>
       )}

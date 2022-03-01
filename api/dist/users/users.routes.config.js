@@ -9,11 +9,34 @@ const users_controller_1 = __importDefault(require("./controllers/users.controll
 const users_middleware_1 = __importDefault(require("./middleware/users.middleware"));
 const common_routes_config_1 = require("../common/common.routes.config");
 const body_validation_middleware_1 = __importDefault(require("../common/middleware/body.validation.middleware"));
+/**
+ * The UsersRoutes class that extends the abstract class CommonRoutesConfig
+ *
+ * @remarks
+ * Contains the configureRoutes function to configure the route for /
+ */
 class UsersRoutes extends common_routes_config_1.CommonRoutesConfig {
+    /**
+     * The constructor for the UsersRoutes class
+     *
+     * @param app - application
+     */
     constructor(app) {
         super(app, 'UsersRoutes');
     }
+    /**
+     * The configureRoutes function
+     *
+     * @remarks
+     * Contains the route for /
+     */
     configureRoutes() {
+        /**
+         * The get and post methods for the url /
+         *
+         * @remarks
+         * Calls the verifyBodyFieldsErrors, validateSameUsernameDoesntExist and createUser functions
+         */
         this.app
             .route(`/`)
             .get(users_controller_1.default.listUsers)
@@ -24,4 +47,4 @@ class UsersRoutes extends common_routes_config_1.CommonRoutesConfig {
     }
 }
 exports.UsersRoutes = UsersRoutes;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidXNlcnMucm91dGVzLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy91c2Vycy91c2Vycy5yb3V0ZXMuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUNBLHlEQUF5QztBQUV6QyxzRkFBNkQ7QUFDN0QscUZBQTREO0FBQzVELHlFQUFvRTtBQUNwRSxpSEFBdUY7QUFFdkYsTUFBYSxXQUFZLFNBQVEseUNBQWtCO0lBQ2pELFlBQVksR0FBd0I7UUFDbEMsS0FBSyxDQUFDLEdBQUcsRUFBRSxhQUFhLENBQUMsQ0FBQztJQUM1QixDQUFDO0lBRUQsZUFBZTtRQUNiLElBQUksQ0FBQyxHQUFHO2FBQ0wsS0FBSyxDQUFDLEdBQUcsQ0FBQzthQUNWLEdBQUcsQ0FBQywwQkFBZSxDQUFDLFNBQVMsQ0FBQzthQUM5QixJQUFJLENBQ0gsSUFBQSx3QkFBSSxFQUFDLFVBQVUsQ0FBQyxDQUFDLEdBQUcsRUFBRSxDQUFDLE9BQU8sRUFBRSxFQUNoQyxJQUFBLHdCQUFJLEVBQUMsVUFBVSxDQUFDO2FBQ2IsUUFBUSxDQUFDLEVBQUUsR0FBRyxFQUFFLENBQUMsRUFBRSxDQUFDO2FBQ3BCLFdBQVcsQ0FBQyx1Q0FBdUMsQ0FBQyxFQUN2RCxvQ0FBd0IsQ0FBQyxzQkFBc0IsRUFDL0MsMEJBQWUsQ0FBQywrQkFBK0IsRUFDL0MsMEJBQWUsQ0FBQyxVQUFVLENBQzNCLENBQUM7UUFFSixPQUFPLElBQUksQ0FBQyxHQUFHLENBQUM7SUFDbEIsQ0FBQztDQUNGO0FBckJELGtDQXFCQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidXNlcnMucm91dGVzLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy91c2Vycy91c2Vycy5yb3V0ZXMuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUNBLHlEQUF5QztBQUV6QyxzRkFBNkQ7QUFDN0QscUZBQTREO0FBQzVELHlFQUFvRTtBQUNwRSxpSEFBdUY7QUFFdkY7Ozs7O0dBS0c7QUFDSCxNQUFhLFdBQVksU0FBUSx5Q0FBa0I7SUFDakQ7Ozs7T0FJRztJQUNILFlBQVksR0FBd0I7UUFDbEMsS0FBSyxDQUFDLEdBQUcsRUFBRSxhQUFhLENBQUMsQ0FBQztJQUM1QixDQUFDO0lBRUQ7Ozs7O09BS0c7SUFDSCxlQUFlO1FBQ2I7Ozs7O1dBS0c7UUFDSCxJQUFJLENBQUMsR0FBRzthQUNMLEtBQUssQ0FBQyxHQUFHLENBQUM7YUFDVixHQUFHLENBQUMsMEJBQWUsQ0FBQyxTQUFTLENBQUM7YUFDOUIsSUFBSSxDQUNILElBQUEsd0JBQUksRUFBQyxVQUFVLENBQUMsQ0FBQyxHQUFHLEVBQUUsQ0FBQyxPQUFPLEVBQUUsRUFDaEMsSUFBQSx3QkFBSSxFQUFDLFVBQVUsQ0FBQzthQUNiLFFBQVEsQ0FBQyxFQUFFLEdBQUcsRUFBRSxDQUFDLEVBQUUsQ0FBQzthQUNwQixXQUFXLENBQUMsdUNBQXVDLENBQUMsRUFDdkQsb0NBQXdCLENBQUMsc0JBQXNCLEVBQy9DLDBCQUFlLENBQUMsK0JBQStCLEVBQy9DLDBCQUFlLENBQUMsVUFBVSxDQUMzQixDQUFDO1FBRUosT0FBTyxJQUFJLENBQUMsR0FBRyxDQUFDO0lBQ2xCLENBQUM7Q0FDRjtBQXRDRCxrQ0FzQ0MifQ==

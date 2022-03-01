@@ -20,7 +20,8 @@
   "plugins": [
     "react",
     "@typescript-eslint",
-    "prettier"
+    "prettier",
+    "eslint-plugin-tsdoc"
   ],
   "rules": {
     "quotes": [
@@ -31,9 +32,10 @@
     "react/function-component-definition": [
       2,
       {
-        "namedComponents": "function-declaration",
+        "namedComponents": "function-declaration"
       }
     ],
+    "import/prefer-default-export": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
@@ -43,7 +45,12 @@
         "ts": "never",
         "tsx": "never"
       }
-    ]
+    ],
+    "class-methods-use-this": "off",
+    "no-underscore-dangle": "off",
+    "no-unused-vars": "off",
+    "no-plusplus": "off",
+    "tsdoc/syntax": "warn"
   },
   "settings": {
     "import/resolver": {

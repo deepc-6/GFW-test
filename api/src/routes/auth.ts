@@ -1,12 +1,12 @@
 import express from 'express';
 import { body } from 'express-validator';
 
-import { CommonRoutesConfig } from '../common/common.routes.config';
-import authController from './controllers/auth.controller';
-import AuthMiddleware from './middleware/auth.middleware';
-import jwtMiddleware from './middleware/jwt.middleware';
-import BodyValidationMiddleware from '../common/middleware/body.validation.middleware';
-import UsersController from '../users/controllers/users.controller';
+import { CommonRoutesConfig } from './common';
+import AuthController from '../controllers/auth';
+import UserController from '../controllers/users';
+import AuthMiddleware from '../middleware/auth';
+import JwtMiddleware from '../middleware/jwt';
+import BodyValidationMiddleware from '../middleware/body.validation';
 
 /**
  * The AuthRoutes class that extends the abstract class CommonRoutesConfig
@@ -47,7 +47,7 @@ export class AuthRoutes extends CommonRoutesConfig {
         .withMessage('Must include password (6+ characters)'),
       BodyValidationMiddleware.verifyBodyFieldsErrors,
       AuthMiddleware.verifyUserPassword,
-      authController.createJWT,
+      AuthController.createJWT,
     ]);
 
     /**
@@ -60,9 +60,9 @@ export class AuthRoutes extends CommonRoutesConfig {
      * @param body - express validated body field
      */
     this.app.post(`/me`, [
-      jwtMiddleware.validJWTNeeded,
+      JwtMiddleware.validJWTNeeded,
       AuthMiddleware.checkUser,
-      UsersController.getUsername,
+      UserController.getUsername,
     ]);
 
     return this.app;

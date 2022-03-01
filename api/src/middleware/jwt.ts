@@ -1,7 +1,7 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 
-import { Jwt } from '../../common/types/jwt';
+import { Jwt } from '../common/types/jwt';
 
 /** Get JWT secret from .env file */
 const jwtSecret: string | undefined = process.env.JWT_SECRET;

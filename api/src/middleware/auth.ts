@@ -1,7 +1,7 @@
 import express from 'express';
 import * as argon2 from 'argon2';
 
-import usersService from '../../users/services/users.service';
+import UserService from '../services/users';
 
 /**
  * The auth middleware class
@@ -24,7 +24,7 @@ class AuthMiddleware {
     res: express.Response,
     next: express.NextFunction
   ) {
-    const user: any = await usersService.getUserByUsernameWithPassword(
+    const user: any = await UserService.getUserByUsernameWithPassword(
       req.body.username
     );
     if (user) {

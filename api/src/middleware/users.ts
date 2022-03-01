@@ -1,14 +1,14 @@
 import express from 'express';
 
-import userService from '../services/users.service';
+import UserService from '../services/users';
 
 /**
- * The users middleware class
+ * The user middleware class
  *
  * @remarks
  * Contains the validateSameUsernameDoesntExist async function
  */
-class UsersMiddleware {
+class UserMiddleware {
   /**
    * Verifies if user already exists in DB
    *
@@ -23,7 +23,7 @@ class UsersMiddleware {
     res: express.Response,
     next: express.NextFunction
   ) {
-    const user = await userService.getUserByUsernameWithPassword(
+    const user = await UserService.getUserByUsernameWithPassword(
       req.body.username
     );
     if (user) {
@@ -34,4 +34,4 @@ class UsersMiddleware {
   }
 }
 
-export default new UsersMiddleware();
+export default new UserMiddleware();

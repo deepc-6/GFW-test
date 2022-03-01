@@ -1,7 +1,7 @@
 import shortid from 'shortid';
 
-import { CreateUserDto } from '../dto/create.user.dto';
-import mongooseService from '../../common/services/mongoose.service';
+import UserDto from '../dto/users';
+import mongooseService from '../services/mongoose';
 
 /**
  * The UsersDao class
@@ -12,7 +12,7 @@ import mongooseService from '../../common/services/mongoose.service';
  */
 class UsersDao {
   /** The array of users */
-  users: Array<CreateUserDto> = [];
+  users: Array<UserDto> = [];
 
   /** Get schema from mongoose */
   Schema = mongooseService.getMongoose().Schema;
@@ -33,14 +33,14 @@ class UsersDao {
   /**
    * Saves a user to MongoDB and returns the id
    *
-   * @param userFields - user fields based on create user dto
+   * @param user - user based on user dto
    *
    * @returns userId
    */
-  async addUser(userFields: CreateUserDto) {
+  async addUser(userFields: UserDto) {
     const userId = shortid.generate();
     const user = new this.User({
-      _id: userId,
+      id: userId,
       ...userFields,
     });
     await user.save();

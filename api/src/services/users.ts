@@ -1,14 +1,14 @@
-import UsersDao from '../dao/users.dao';
-import { CreateUserDto } from '../dto/create.user.dto';
-import { CRUD } from '../../common/interfaces/crud.interface';
+import UserDao from '../dao/users';
+import UserDto from '../dto/users';
+import { CRUD } from '../common/interfaces/crud.interface';
 
 /**
- * The UsersService class
+ * The UserService class
  *
  * @remarks
  * Contains the create, list, readById and getUserByUsernameWithPassword async functions
  */
-class UsersService implements CRUD {
+class UserService implements CRUD {
   /**
    * Creates a user
    *
@@ -16,8 +16,8 @@ class UsersService implements CRUD {
    *
    * @returns addUser function from UsersDao
    */
-  async create(user: CreateUserDto) {
-    return UsersDao.addUser(user);
+  async create(user: UserDto) {
+    return UserDao.addUser(user);
   }
 
   /**
@@ -29,7 +29,7 @@ class UsersService implements CRUD {
    * @returns getUsers function from UsersDao
    */
   async list(limit: number, page: number) {
-    return UsersDao.getUsers(limit, page);
+    return UserDao.getUsers(limit, page);
   }
 
   /**
@@ -40,7 +40,7 @@ class UsersService implements CRUD {
    * @returns getUserById function from UsersDao
    */
   async readById(id: string) {
-    return UsersDao.getUserById(id);
+    return UserDao.getUserById(id);
   }
 
   /**
@@ -51,8 +51,8 @@ class UsersService implements CRUD {
    * @returns getUserByUsernameWithPassword function from UsersDao
    */
   async getUserByUsernameWithPassword(username: string) {
-    return UsersDao.getUserByUsernameWithPassword(username);
+    return UserDao.getUserByUsernameWithPassword(username);
   }
 }
 
-export default new UsersService();
+export default new UserService();

@@ -1,15 +1,15 @@
 import express from 'express';
 import argon2 from 'argon2';
 
-import usersService from '../services/users.service';
+import UserService from '../services/users';
 
 /**
- * The UsersController class
+ * The UserController class
  *
  * @remarks
  * Contains the listUsers, getUserById, getUsername and createUser async functions
  */
-class UsersController {
+class UserController {
   /**
    * Finds all users and returns them
    *
@@ -19,7 +19,7 @@ class UsersController {
    * @returns Response with status and list of users
    */
   async listUsers(req: express.Request, res: express.Response) {
-    const users = await usersService.list(100, 0);
+    const users = await UserService.list(100, 0);
     res.status(200).send(users);
   }
 
@@ -32,7 +32,7 @@ class UsersController {
    * @returns Response with status and user
    */
   async getUserById(req: express.Request, res: express.Response) {
-    const user = await usersService.readById(req.body.id);
+    const user = await UserService.readById(req.body.id);
     res.status(200).send(user);
   }
 
@@ -59,9 +59,9 @@ class UsersController {
    */
   async createUser(req: express.Request, res: express.Response) {
     req.body.password = await argon2.hash(req.body.password);
-    const userId = await usersService.create(req.body);
+    const userId = await UserService.create(req.body);
     res.status(201).send({ _id: userId });
   }
 }
 
-export default new UsersController();
+export default new UserController();

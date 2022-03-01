@@ -1,25 +1,25 @@
 import express from 'express';
 import { body } from 'express-validator';
 
-import UsersController from './controllers/users.controller';
-import UsersMiddleware from './middleware/users.middleware';
-import { CommonRoutesConfig } from '../common/common.routes.config';
-import BodyValidationMiddleware from '../common/middleware/body.validation.middleware';
+import { CommonRoutesConfig } from './common';
+import UserController from '../controllers/users';
+import UserMiddleware from '../middleware/users';
+import BodyValidationMiddleware from '../middleware/body.validation';
 
 /**
- * The UsersRoutes class that extends the abstract class CommonRoutesConfig
+ * The UserRoutes class that extends the abstract class CommonRoutesConfig
  *
  * @remarks
  * Contains the configureRoutes function to configure the route for /
  */
-export class UsersRoutes extends CommonRoutesConfig {
+export class UserRoutes extends CommonRoutesConfig {
   /**
-   * The constructor for the UsersRoutes class
+   * The constructor for the UserRoutes class
    *
    * @param app - application
    */
   constructor(app: express.Application) {
-    super(app, 'UsersRoutes');
+    super(app, 'UserRoutes');
   }
 
   /**
@@ -37,15 +37,15 @@ export class UsersRoutes extends CommonRoutesConfig {
      */
     this.app
       .route(`/`)
-      .get(UsersController.listUsers)
+      .get(UserController.listUsers)
       .post(
         body('username').not().isEmpty(),
         body('password')
           .isLength({ min: 6 })
           .withMessage('Must include password (6+ characters)'),
         BodyValidationMiddleware.verifyBodyFieldsErrors,
-        UsersMiddleware.validateSameUsernameDoesntExist,
-        UsersController.createUser
+        UserMiddleware.validateSameUsernameDoesntExist,
+        UserController.createUser
       );
 
     return this.app;

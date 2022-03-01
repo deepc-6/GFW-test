@@ -55,7 +55,10 @@
     "no-plusplus": "off",
     "tsdoc/syntax": "warn"
   },
-  "settings": {
+  "settings": {    
+    "react": {
+      "version": "16.14.0"
+    },
     "import/resolver": {
       "node": {
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
